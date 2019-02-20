@@ -1,0 +1,23 @@
+Read-Host "Enter password" -AsSecureString | ConvertFrom-SecureString | Out-File .\sample.txt -Force
+$pass= Get-Content .\sample.txt | ConvertTo-SecureString
+
+###########################################################################################################
+
+#sample to Store Password in file using encryption key
+$key = New-Object Byte[] 32
+[Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($key)
+
+Read-Host "Enter password" -AsSecureString | ConvertFrom-SecureString -Key $key | Out-File .\sample.txt -Force
+$pass= Get-Content .\sample.txt | ConvertTo-SecureString -Key $key
+
+$Credential=New-Object System.Management.Automation.PSCredential("peer\peer",$pass)
+###############################################################################################################
+#sample to Store Password in file using encryption key file
+$key = New-Object Byte[] 32
+[Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($key)
+$key | out-File $PSScriptRoot\passkey.key
+Read-Host "Enter password" -AsSecureString | ConvertFrom-SecureString -Key (Get-Content $PSScriptRoot\passkey.key) | Out-File .\sample.txt -Force
+Import-LocalizedData -BaseDirectory $PSScriptRoot -FileName sample.psd1 -BindingVariable info
+$pass= $info.Password | ConvertTo-SecureString -Key (Get-Content $PSScriptRoot\passkey.key)
+$Credential=New-Object System.Management.Automation.PSCredential("peer\peer",$pass)\
+###############################################################################################################
