@@ -1,0 +1,11 @@
+#sample one
+Add-Type -Assembly System.Drawing
+$image = [System.Drawing.Image]::FromFile("C:\users\Administrator\Desktop\Avengers.jpg")
+$button.Image = $image
+
+#sample two
+#Add Image to Button
+$image = New-Object System.Windows.Controls.Image
+$image.Source = "C:\users\Administrator\Desktop\Avengers.jpg"
+$image.Stretch = 'Fill'
+$button.Content = $image
