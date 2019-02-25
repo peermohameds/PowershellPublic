@@ -1,0 +1,11 @@
+#Ping and DNS Resolve
+$a= new-object System.Net.NetworkInformation.Ping
+[System.Net.NetworkInformation.NetworkInterface]::GetAllNetworkInterfaces()
+$res=$a.Send("www.goo.com",500)
+$a=[System.Net.Dns]::GetHostEntry("216.58.200.132")
+[System.Net.Dns]::GetHostByName("www.google.com")
+[System.Net.Sockets.TcpClient]::new("www.google.com",80)
+
+#System Variable
+[System.Environment]::SetEnvironmentVariable("Name","Peer",[System.EnvironmentVariableTarget]::Machine)
+[System.Environment]::GetEnvironmentVariable("Path",[System.EnvironmentVariableTarget]::Machine)
