@@ -1,0 +1,33 @@
+#First Way
+$serviceobj | Format-Table Name,@{label='Status';E={
+                    switch ($_.Status) {
+                        'Stopped' {$color = '5'; break  }
+                        'Running' {$color = '32'; break  }
+                        Default {$color = '93'; break}
+                    }
+                    $e = [char]27
+                  "$e[${color}m$($_.Status)${e}[0m"
+                }
+  }
+  
+  #secondway
+  
+  function Format-Color {
+    param (
+     [hashtable]$Colors=@{}   
+    )
+    
+    $lines = ($input | Out-String) -replace "`r", "" -split "`n"
+    Foreach ($line in $lines){
+
+        foreach ($pattern in $Colors.Keys){
+
+            if ($line -match $pattern){
+            Write-Host $line -ForegroundColor $Colors[$pattern]
+        }else{
+
+            Write-Host $line
+            }
+        }
+    }     
+}
