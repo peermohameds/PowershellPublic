@@ -1,3 +1,38 @@
+$Head =@"
+<Style>
+body { 
+    font-family:Tahoma, Geneva, sans-serif;
+    font-size:10pt; }
+table {
+    font-family: Tahoma, Geneva, sans-serif;
+    border: 0px solid #772953;
+    width: 60%;
+    text-align: left;
+    border-collapse: collapse;
+  }
+td, th {
+    border: 1px solid #772953;
+    padding: 5px 4px;
+  }
+td {
+    font-size: 11px;
+  }
+
+th {
+    background: #772953;
+    border-bottom: 0px solid #772953;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 0px solid #D0E4F5;
+  }
+.alert {
+    color: red;
+    font-weight: bold;
+}
+</Style>
+"@
 [String[]]$Search ="xbox","web"
 
 $scriptblock={
