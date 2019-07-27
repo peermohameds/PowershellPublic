@@ -278,7 +278,7 @@
 "@ #>
 Add-Type -AssemblyName PresentationFramework
 
-[xml]$xaml = Get-Content E:\Powershell\XAML\FormStyles.xaml
+[xml]$xaml = Get-Content .\FormStyles.xaml
 $reader = (New-Object System.Xml.XmlNodeReader $xaml)
 $window = [Windows.Markup.XamlReader]::Load($reader)
 #$button = $window.FindName("btnStatus")
