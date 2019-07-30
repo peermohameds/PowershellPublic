@@ -67,13 +67,13 @@ $scriptblock={
 } 
 
 $params = @{
-    ScriptBlock = $customBlock
+    ScriptBlock = $scriptblock
     ArgumentList = (,$Search)
 }
 
 $result = Invoke-Command @params
 
-$data = $result | Select-Object Name,DisplayName,Status,StartMode | Group-Object -Property StartMode
+$data = $result | Select-Object Name,DisplayName,State,StartMode | Group-Object -Property StartMode
 $alertString ="Stopped","Stopping"
 $fragment =@()
 $body=$null
@@ -81,7 +81,7 @@ Foreach($item in $data){
     $body += "<H2>Start Mode : $($item.Name)</H2>"
     #$body += $item.Group | Select-Object name,DisplayName,Status,StartMode | ConvertTo-Html -Fragment -As Table 
 
-    [XML]$HTML = $item.Group | Select-Object name,DisplayName,Status,StartMode | ConvertTo-Html -Fragment -As Table 
+    [XML]$HTML = $item.Group | Select-Object name,DisplayName,State,StartMode | ConvertTo-Html -Fragment -As Table 
     
     for ($i=1;$i -le $html.table.tr.count-1;$i++) {
         if ($html.table.tr[$i].td[2] -in $alertString) {
