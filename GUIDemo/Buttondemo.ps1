@@ -36,7 +36,7 @@ $HTML=@"
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=10" /> 
 <style> 
 div {
   width: 100px;
@@ -191,7 +191,9 @@ $Btn.Add_Click({
         #$uri = [uri]::new("https://www.google.com")
         #$mybrowser.Navigate($uri)
         #$uri
-        $mybrowser.NavigateToString($htmllayout)
+        #$mybrowser.NavigateToString($htmllayout)
+        $mybrowser.Document.getElementsByTagName("text").value="Sample"
+        
 })
 #$mybrowser.Navigate("www.google.com")
 
@@ -201,8 +203,10 @@ $person = [PSCustomObject]@{
     Memo = "sample address"
 }
 
-$listView.Items.Add($person)
+#$listView.Items.Add($person)
 
+$uri = [uri]::new("https://www.google.com")
+$mybrowser.Navigate($uri)
 
 $WebForm.ShowDialog()
 
