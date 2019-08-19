@@ -81,18 +81,19 @@ $htmllayout=@"
 <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <script>
 `$(document).ready(function(){
+       `$("myinput").tooltip();
       var numOfVisibleRows = `$("#mytable tr:visible").length;
       `$("#resbox").val(numOfVisibleRows);
       `$("#searchbtn").click(function(){
           var value = `$("#myInput").val().toLowerCase();
-          alert(value)
+          //alert(value)
           `$("#mytable tr").filter(function() {
               `$(this).toggle(`$(this).text().toLowerCase().indexOf(value) > -1)
             });
@@ -144,21 +145,89 @@ $htmllayout=@"
   
 });
 </script>
+<script>
+var tableToExcel = (function () {
+  var uri = 'data:application/vnd.ms-excel;base64,'
+      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+      , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+      , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+  return function (table, name) {
+      if (!table.nodeType) table = document.getElementById(table)
+      var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+      var blob = new Blob([format(template, ctx)]);
+      var blobURL = window.URL.createObjectURL(blob);
+
+      if (ifIE()) {
+          csvData = table.innerHTML;
+          if (window.navigator.msSaveBlob) {
+              var blob = new Blob([format(template, ctx)], {
+                  type: "text/html"
+              });
+              navigator.msSaveOrOpenBlob(blob, '' + name + '.xls');
+          }
+      }
+      else
+      window.location.href = uri + base64(format(template, ctx))
+  }
+})()
+
+function ifIE() {
+  var isIE11 = navigator.userAgent.indexOf(".NET CLR") > -1;
+  var isIE11orLess = isIE11 || navigator.appVersion.indexOf("MSIE") != -1;
+  return isIE11orLess;
+}
+
+`$(document).ready(function(){
+  `$("#exportxls").click(function(){
+    tableToExcel('dtBasicExample', 'desdata')
+  });
+});
+</script>
+<script>
+`$(document).ready(function(){
+  `$("#exportpdf").click(function(){
+    tableToExcel('dtBasicExample', 'desdata')
+  });
+});
+</script>
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
-.table{  font-size: 12px;}
-.table:hovered { background-color: "red"; color: "white"; }
+.destable {
+  font-family: Tahoma, Geneva, sans-serif;
+  
+  width: 60%;
+  text-align: left;
+  
+}
+.destable td, th {
+  padding: 5px 4px;
+}
+.destable td {
+  font-size: 11px;
+}
+.destable tr:hover {background-color: #f5f5f5;}
+
+.destable th {
+  background: #772953;
+  border-bottom: 1px solid #772953;
+  font-size: 10px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: left;
+  
+}
 </style>
 </head>
 <body>
+
 <h2>Filterable Table</h2>
-<p>Type something in the input field to search the table.</p>  
+  
 <div class="row">
       <div class="col">
             <div class="input-group input-group-sm mb-3">
-                  <input type="text" class="form-control" id="myInput" placeholder="Search.No wildcards">
+                  <input type="text" class="form-control" id="myInput" placeholder="Search.No wildcards" data-toggle="myinputtooltip" title="Search the text!">
                   <div class="input-group-append">
                     <button class="btn btn-success btn-sm" id="searchbtn" type="submit">Search</button> 
                   </div>
@@ -169,7 +238,7 @@ body {
                   <div class="input-group-prepend">
                     <span class="input-group-text"># of Rows</span>
                   </div>
-                  <input type="text" class="form-control" id="resbox" placeholder="#" > 
+                  <input type="text" class="form-control" id="resbox" placeholder="#" readonly style="background-color:transparent"> 
             </div>
       </div>
       
@@ -197,8 +266,8 @@ $Xaml.SelectNodes("//*[@Name]") | %{Set-Variable -Name $_.Name -Value $WebForm.F
 
 $Btn.Add_Click({
   $result = Get-Service | Select-Object Name,DisplayName,Status,StartType      
-  #$result = Get-Process | Select -First 20      
- 
+  #$result = Get-Process | Select ProcessName,ID -First 20      
+ #$result = gci | select Name, Length,LastwriteTime
   [xml]$Services = $result  | ConvertTo-Html -As Table -Fragment
   $col=for($i=2; $i -le $Services.table.ChildNodes.Count-1;$i++){ "<tr>"+$Services.table.ChildNodes[$i].InnerXml+"</tr>" }
   $thead="<thead><tr>"+$Services.table.ChildNodes[1].InnerXml+"</tr></thead>"
@@ -206,7 +275,8 @@ $Btn.Add_Click({
   $temp =$thead+$col
   $Services.table.InnerXml=$temp
   $class = $Services.CreateAttribute("class")
-  $class.value = 'table table-sm'
+  #$class.value = 'table table-sm'
+  $class.value = 'destable'
   $ID = $Services.CreateAttribute("id")
   $ID.value = 'dtBasicExample'
   $Services.table.Attributes.Append($class)
@@ -228,8 +298,8 @@ $person = [PSCustomObject]@{
 
 #$listView.Items.Add($person)
 
-$uri = [uri]::new("https://www.google.com")
-$mybrowser.Navigate($uri)
+#$uri = [uri]::new("https://www.google.com")
+#$mybrowser.Navigate($uri)
 
 $WebForm.ShowDialog()
 
