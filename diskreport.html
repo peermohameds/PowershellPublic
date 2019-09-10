@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+body {
+    background-color: #FFFFFF;
+    font-family: Tahoma;
+    font-size: 12pt;
+}
+td,
+th {
+    border: 0px solid black;
+    border-collapse: collapse;
+}
+th {
+    color: white;
+    background-color: black;
+}
+table,
+tr,
+td,
+th {
+    padding: 2px;
+    margin: 0px;
+}
+tr:nth-child(even) {
+    background-color: lightgray
+}
+table {
+    width: 95%;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    table-layout: fixed;
+}
+.meta {
+    width: 25%;
+    font-size: 8pt;
+    margin-left: 0px;
+    table-layout: auto;
+}
+.top {
+    width: 50%;
+    margin-left: 0px;
+    table-layout: auto;
+}
+tr.meta {
+    background-color: #FFFFFF;
+}
+.right {
+    text-align: right;
+    width: 20%;
+}
+caption {
+    background-color: #FFFF66;
+    text-align: left;
+    font-weight: bold;
+    font-size: 14pt;
+}
+td[tip]:hover {
+    color: #ff2283;
+    position: relative;
+}
+td[tip]:hover:after {
+    content: attr(tip);
+    left: 0;
+    top: 100%;
+    margin-left: 80px;
+    margin-top: 10px;
+    width: 400px;
+    padding: 3px 8px;
+    position: absolute;
+    color: #85003a;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10pt;
+    background-color: gainsboro;
+    white-space: pre-wrap;
+}
+</style>
+<Title>DiskReport</Title>
+</head><body>
+<H1>DiskReport</H1><br>
+<br><br>
+<table><colgroup><col /><col /><col /><col /><col /></colgroup><tr><th>Drive</th><th>Volume</th><th>SizeGB</th><th>FreeGB</th><th>PercentFree</th></tr><tr><td tip="Caption          : WDC WDS240G2G0A-00JH30&#xD;&#xA;SerialNumber     : 19222E802826&#xD;&#xA;FirmwareRevision : UF510000&#xD;&#xA;Size             : 240063022080&#xD;&#xA;InterfaceType    : IDE&#xD;&#xA;SCSIBus          : 0&#xD;&#xA;SCSILogicalUnit  : 0&#xD;&#xA;SCSIPort         : 0&#xD;&#xA;SCSITargetId     : 0">C:</td><td></td><td>125</td><td>78.7426</td><td style="filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, &#xD;&#xA;StartColorStr=#0A802D, EndColorStr=#FF0011)&#xD;&#xA;background-color: #376C46;&#xD;&#xA;background-image: -mso-linear-gradient(left, #0A802D 63%, #FF0011 37%);&#xD;&#xA;background-image: -ms-linear-gradient(left, #0A802D 63%, #FF0011 37%);&#xD;&#xA;background-image: -moz-linear-gradient(left, #0A802D 63%, #FF0011 37%);&#xD;&#xA;background-image: -o-linear-gradient(left, #0A802D 63%, #FF0011 37%);&#xD;&#xA;background-image: -webkit-linear-gradient(left, #0A802D 63%, #FF0011 37%);&#xD;&#xA;background-image: linear-gradient(left, #0A802D 63%, #FF0011 37%);&#xD;&#xA;color:white;">62.82</td></tr><tr><td tip="Caption          : WDC WDS240G2G0A-00JH30&#xD;&#xA;SerialNumber     : 19222E802826&#xD;&#xA;FirmwareRevision : UF510000&#xD;&#xA;Size             : 240063022080&#xD;&#xA;InterfaceType    : IDE&#xD;&#xA;SCSIBus          : 0&#xD;&#xA;SCSILogicalUnit  : 0&#xD;&#xA;SCSIPort         : 0&#xD;&#xA;SCSITargetId     : 0">D:</td><td>PeerShell</td><td>98</td><td>97.3264</td><td style="filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, &#xD;&#xA;StartColorStr=#0A802D, EndColorStr=#FF0011)&#xD;&#xA;background-color: #376C46;&#xD;&#xA;background-image: -mso-linear-gradient(left, #0A802D 100%, #FF0011 0%);&#xD;&#xA;background-image: -ms-linear-gradient(left, #0A802D 100%, #FF0011 0%);&#xD;&#xA;background-image: -moz-linear-gradient(left, #0A802D 100%, #FF0011 0%);&#xD;&#xA;background-image: -o-linear-gradient(left, #0A802D 100%, #FF0011 0%);&#xD;&#xA;background-image: -webkit-linear-gradient(left, #0A802D 100%, #FF0011 0%);&#xD;&#xA;background-image: linear-gradient(left, #0A802D 100%, #FF0011 0%);&#xD;&#xA;color:white;">99.66</td></tr><caption title="Microsoft Windows 10 Home">DESKTOP-8SOL6JA</caption></table>
+
+<table>
+</table>
+<br><br><table class="meta"><tr class="meta"><td class="right">Report Run:</td><td>09/09/2019 23:48:35 UTC</td></tr><tr class="meta"><td class="right">Run By:</td><td>DESKTOP-8SOL6JA\Peer</td></tr><tr class="meta"><td class="right">Originated:</td><td>DESKTOP-8SOL6JA</td></tr><tr class="meta"><td class="right">Command:</td><td>New-HTMLDiskReport</td></tr><tr class="meta"><td class="right">Version:</td><td>2.0</td></tr></table>
+</body></html>
