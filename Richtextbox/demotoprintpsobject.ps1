@@ -304,6 +304,6 @@ $NxtBtn.Add_Click({
     $Rtxt.Document = $flowdoc 
     #$fldocument =[System.Windows.Documents.FlowDocument]::new()
 })
-
+$WebForm.
 $WebForm.ShowDialog()
 
