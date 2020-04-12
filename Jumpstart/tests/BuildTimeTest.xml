@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="2" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2020-04-12" time="07:18:40">
+  <environment user="Peer" os-version="10.0.18362" nunit-version="2.5.8.0" clr-version="Unknown" platform="Microsoft Windows 10 Home|C:\Windows|\Device\Harddisk0\Partition2" machine-name="DESKTOP-8SOL6JA" user-domain="DESKTOP-8SOL6JA" cwd="D:\Project\Jumpstart\tools" />
+  <culture-info current-culture="en-IN" current-uiculture="en-US" />
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="1.7417" asserts="0" description="Pester">
+    <results>
+      <test-suite type="TestFixture" name="D:\Project\Jumpstart\tests\00-Jumpstart.Tests.ps1" executed="True" result="Success" success="True" time="1.2156" asserts="0" description="D:\Project\Jumpstart\tests\00-Jumpstart.Tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Module Manifest Tests" executed="True" result="Success" success="True" time="1.0526" asserts="0" description="Module Manifest Tests">
+            <results>
+              <test-case description="Passes Test-ModuleManifest" name="Module Manifest Tests.Passes Test-ModuleManifest" time="0.833" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="D:\Project\Jumpstart\tests\Add-Number.Tests.ps1" executed="True" result="Success" success="True" time="0.5262" asserts="0" description="D:\Project\Jumpstart\tests\Add-Number.Tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Add-Number" executed="True" result="Success" success="True" time="0.4911" asserts="0" description="Add-Number">
+            <results>
+              <test-case description="does something useful" name="Add-Number.does something useful" time="0.0194" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

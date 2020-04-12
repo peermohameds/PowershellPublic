@@ -1,0 +1,12 @@
+{
+    //-------- Editor configuration --------
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "files.trimTrailingWhitespace": true,
+    //-------- PowerShell configuration --------
+    "powershell.codeFormatting.alignPropertyValuePairs": true,
+    "powershell.codeFormatting.useCorrectCasing": true,
+    "powershell.scriptAnalysis.settingsPath": "PSScriptAnalyzerSettings.psd1",
+    "powershell.scriptAnalysis.enable": true
+
+}
