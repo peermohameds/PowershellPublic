@@ -1,0 +1,491 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontFamily="Roboto"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="MainWindow" Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen">
+
+        <Window.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/Generic.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Yellow.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Green.xaml" />
+                    <!-- <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignDarkTheme.xaml"/> -->
+                    
+                </ResourceDictionary.MergedDictionaries>
+                
+            </ResourceDictionary>
+
+        </Window.Resources>
+
+    <DockPanel>
+        <materialDesign:DialogHost DialogTheme="Inherit"
+                             Identifier="RootDialog" Name="RootDialog"
+                             >
+            <DockPanel>
+                <materialDesign:ColorZone  Height="60" MaxHeight="80" DockPanel.Dock="Top">
+                    <DockPanel DockPanel.Dock="Left">
+                        <materialDesign:ColorZone Width="137" Mode="Custom"
+                                                Background="{DynamicResource MaterialDesignPaper}"
+                                                Foreground="{DynamicResource MaterialDesignBody}"
+                                                ClipToBounds="False">
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center"
+                                        Orientation="Horizontal"    Margin="10 20 0 0">
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">
+                                            <Hyperlink 
+                                                IsEnabled="False"
+                                                Style="{StaticResource MaterialDesignBody1Hyperlink}">
+                                            DEStiny v1.0.0
+                                            </Hyperlink>
+                                        </TextBlock>
+                            </StackPanel>
+                      </materialDesign:ColorZone>
+                        <materialDesign:PopupBox DockPanel.Dock="Left" HorizontalAlignment="Right"
+                                     PlacementMode="BottomAndAlignRightEdges"
+                                     Margin="25 0"
+                                     StaysOpen="True">
+                            <materialDesign:PopupBox.ToggleContent>
+                                <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Height="20" Width="20" Foreground="{DynamicResource SecondaryHueMidBrush}"
+                                                Kind="CogOutline" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </materialDesign:PopupBox.ToggleContent>
+                            <StackPanel>
+                                <TextBlock Margin="10 10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Text="Theme Mode" Foreground="{DynamicResource PrimaryHueMidBrush}"
+                                    Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+                                <StackPanel
+                                        Orientation="Horizontal"
+                                        Margin="4">
+                                        <RadioButton GroupName="ThemeGroup"
+                                            Style="{StaticResource MaterialDesignTabRadioButton}"
+                                            Margin="4"
+                                            Content="Light" />
+                                        <RadioButton GroupName="ThemeGroup"
+                                            Style="{StaticResource MaterialDesignTabRadioButton}"
+                                            Margin="4"
+                                            Content="Dark" />
+                                        <RadioButton GroupName="ThemeGroup"
+                                            Style="{StaticResource MaterialDesignTabRadioButton}"
+                                            Margin="4"
+                                            Content="System" />
+                                        </StackPanel>
+                                        <Separator/>
+
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                        <StackPanel Orientation="Horizontal" Margin="35 0">
+                                <Button ToolTip="Insert Servers"
+                                        x:Name="CtrlInsertServers"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                                        
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon
+                                            Kind="Server" Foreground="{DynamicResource SecondaryHueMidBrush}"/>
+                                            <TextBlock Margin="5 0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignBody2TextBlock}">Servers</TextBlock>
+                                        </StackPanel>
+                                    <Button.CommandParameter>
+                                        <StackPanel>
+                                            
+                                            <materialDesign:Card>
+                                            <StackPanel>
+                                                <TextBlock Margin="10 10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                                    Insert Servers
+                                                </TextBlock>
+                                                <Separator Margin="0 5 0 10"/>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <GroupBox Margin="10 0" Header="Platform"
+                                                                Style="{DynamicResource MaterialDesignGroupBox}"
+                                                                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                                                BorderThickness="0">
+                                                            <ListView x:Name="CtrlPlatformLview" Width="300" Height="250">
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <StackPanel Name="Border" Orientation="Horizontal">
+                                                                            <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Margin="5 0"
+                                                                                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                                                                Content="{Binding Name}"
+                                                                                FontWeight="DemiBold"/>
+                                                                        </StackPanel>
+                                                                        <DataTemplate.Triggers>
+                                                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignSelection}" />
+                                                                            </DataTrigger>
+                                                                        </DataTemplate.Triggers>
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </GroupBox>
+                                                        <GroupBox Margin="10 0" Header="Server Types"
+                                                        Style="{DynamicResource MaterialDesignGroupBox}"
+                                                                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                                                BorderThickness="0">
+                                                            <ListView x:Name="CtrlSrvTypeLview" Width="300" Height="250" BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}">
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <StackPanel Name="Border" Orientation="Horizontal">
+                                                                            <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Margin="5 0"
+                                                                        VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                                            <TextBlock Text="{Binding Name}" Margin="5 0" 
+                                                                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                        Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+                                                                        </StackPanel>
+                                                                        <DataTemplate.Triggers>
+                                                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignSelection}" />
+                                                                            </DataTrigger>
+                                                                        </DataTemplate.Triggers>
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </GroupBox>
+                                                        <GroupBox Margin="10 0" Header="Environment" Style="{DynamicResource MaterialDesignGroupBox}"
+                                                                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                                                BorderThickness="0">
+                                                            <ListView x:Name="CtrlEnvLview" Width="150" Height="250" BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}">
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <StackPanel Name="Border" Orientation="Horizontal">
+                                                                            <CheckBox Style="{StaticResource MaterialDesignCheckBox}" Margin="5 0"
+                                                                        VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                                            <TextBlock Text="{Binding Name}" Margin="5 0" 
+                                                                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                        Style="{StaticResource MaterialDesignSubtitle2TextBlock}"/>
+                                                                        </StackPanel>
+                                                                        <DataTemplate.Triggers>
+                                                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignSelection}" />
+                                                                            </DataTrigger>
+                                                                        </DataTemplate.Triggers>
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </GroupBox>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                        <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                                            IsCancel="False"
+                                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                                            x:Name="BtnExitServer"
+                                                            Margin="5 10"
+                                                            Height="40" Width="100"
+                                                            HorizontalAlignment="Center">
+                                                            <StackPanel Orientation="Horizontal"  Margin="5 5">
+                                                                <materialDesign:PackIcon Kind="ExitToApp" />
+                                                                <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                                                                Text="Exit" Margin="2 0"></TextBlock>
+                                                            </StackPanel>
+                                                        </Button>
+                                                        <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                                            Height="40" Width="100"
+                                                            IsCancel="False"
+                                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                                            x:Name="BtnCopyServer"
+                                                            Margin="5 10"
+                                                            HorizontalAlignment="Center">
+                                                            <StackPanel Orientation="Horizontal"  Margin="5 5">
+                                                                <materialDesign:PackIcon Kind="ContentCopy" />
+                                                                <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                                                                Text="Copy" Margin="2 0"></TextBlock>
+                                                            </StackPanel>
+                                                        </Button>
+                                                        <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                                            IsCancel="False"
+                                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                                            x:Name="BtnInsServer"
+                                                            Margin="5 10"
+                                                            Height="40" Width="100"
+                                                            HorizontalAlignment="Center">
+                                                            <StackPanel Orientation="Horizontal"  Margin="5 5">
+                                                                <materialDesign:PackIcon Kind="FileDocumentEditOutline" />
+                                                                <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                                                                Text="Insert" Margin="2 0"></TextBlock>
+                                                            </StackPanel>
+                                                        </Button>
+                                                    </StackPanel>
+                                                    
+                                            </StackPanel>
+                                            </materialDesign:Card>
+                                        </StackPanel> 
+                                    </Button.CommandParameter>
+                                </Button>
+                                <Button ToolTip="Export To csv, Excel" Name="exportbtn" Style="{StaticResource MaterialDesignFlatButton}"
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                                     <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon
+                                            Kind="MicrosoftExcel" Foreground="{DynamicResource SecondaryHueMidBrush}"/>
+                                            <TextBlock Margin="5 0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignBody2TextBlock}">Export</TextBlock>
+                                        </StackPanel>
+                                        <Button.CommandParameter>
+                                            <materialDesign:Card> 
+                                                <StackPanel Name="SavePanel" Width="420">
+                                                    <TextBlock Margin="10 10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                            Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+                                                        Export Output
+                                                    </TextBlock>
+                                                    <Separator Margin="0 5 0 10"/>
+                                                     <!-- <materialDesign:Card Padding="10 10" Margin="10 10" materialDesign:ShadowAssist.ShadowDepth="Depth1">  -->
+                                                    <WrapPanel Width="450" Margin="20 15">
+                                                            <RadioButton GroupName="Action"
+                                                                Style="{StaticResource MaterialDesignRadioButton}"
+                                                                ToolTip="MaterialDesignActionToggleButton">
+                                                                <StackPanel Orientation="Horizontal" Height="40" Margin="10 10">
+                                                                    <materialDesign:PackIcon Kind="FileExcel" Height="30" Width="30" Foreground="Green"/>
+                                                                    <TextBlock Margin="10 0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignBody2TextBlock}">Excel .xlsx</TextBlock>
+                                                                </StackPanel>
+                                                                
+                                                            </RadioButton>
+                                                            <RadioButton GroupName="Action"
+                                                                Style="{StaticResource MaterialDesignRadioButton}"
+                                                                ToolTip="MaterialDesignActionToggleButton">
+                                                                <StackPanel Orientation="Horizontal" Height="40" Margin="10 10">
+                                                                    <materialDesign:PackIcon Kind="FileDelimited" Height="30" Width="30" Foreground="Yellow" />
+                                                                    <TextBlock Margin="10 0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignBody2TextBlock}">Comma Seperated .csv</TextBlock>
+                                                                </StackPanel>
+                                                                
+                                                            </RadioButton>
+                                                                                                                            <RadioButton GroupName="Action"
+                                                                Style="{StaticResource MaterialDesignRadioButton}"
+                                                                ToolTip="MaterialDesignActionToggleButton">
+                                                                <StackPanel Orientation="Horizontal" Height="40" Margin="10 10">
+                                                                    <materialDesign:PackIcon Kind="FileDelimited" Height="30" Width="30" Foreground="Crimson"/>
+                                                                    <TextBlock Margin="10 0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignBody2TextBlock}">Excel 2003 .xls</TextBlock>
+                                                                </StackPanel>
+                                                                
+                                                            </RadioButton>
+                                                
+                                                    </WrapPanel>
+                                                     <!-- </materialDesign:Card>  -->
+                                                    <StackPanel Margin="10 10" Orientation="Horizontal">
+                                                        <!-- <materialDesign:PackIcon Kind="FileExport" Margin="5 10" Height="30" Width="30"/> -->
+                                                            <!-- <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                                    Text="C:\Temp\DEStiny\Output\Get-ChildItem_xxxxxxxx_xxxxxx.xls" Margin="5 0"></TextBlock> -->
+                                                            <TextBox IsReadOnly="True"
+                                                                x:Name="CommentTextBox"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Bottom"
+                                                                Margin="5 5 5 10"
+                                                                materialDesign:HintAssist.Hint="Comment"
+                                                                TextWrapping="Wrap"
+                                                                Text="INvoke Child ChildItem_xxxxxxxx_xxxxxx.xls"
+                                                                materialDesign:HintAssist.HelperText="File Path">
+                                                            </TextBox>
+                                                    </StackPanel>
+                                                        <Separator Margin="0 5 0 10"/>
+                                                        <StackPanel Orientation="Horizontal" Margin="10 10" HorizontalAlignment="Right">
+                                                            <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                                                IsCancel="False"
+                                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                                                x:Name="BtnExitExport"
+                                                                Margin="5 10"
+                                                                Height="40" Width="100"
+                                                                HorizontalAlignment="Center">
+                                                                <StackPanel Orientation="Horizontal"  Margin="5 5">
+                                                                    <materialDesign:PackIcon Kind="ExitToApp" />
+                                                                    <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                                                                    Text="Close" Margin="2 0"></TextBlock>
+                                                                </StackPanel>
+                                                            </Button>  
+
+                                                            <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                                                IsCancel="False"
+                                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                                                x:Name="BtnExport"
+                                                                Margin="5 10"
+                                                                Height="40" Width="110"
+                                                                HorizontalAlignment="Center">
+                                                                <StackPanel Orientation="Horizontal"  Margin="5 5">
+                                                                    <materialDesign:PackIcon Kind="FileExport" />
+                                                                    <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                                                                    Text="Export" Margin="2 0"></TextBlock>
+                                                                </StackPanel>
+                                                            </Button>
+                                                        </StackPanel>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </Button.CommandParameter>
+                                </Button>
+                        </StackPanel>
+                        
+                        <materialDesign:Chip  Margin="10 0 10 0" DockPanel.Dock="Right"
+                                          HorizontalAlignment="Right"
+                                          Content="Credential"
+                                          IconBackground="{DynamicResource PrimaryHueDarkBrush}"
+                                          IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                          Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                            <materialDesign:Chip.Icon>
+                                <materialDesign:PackIcon Kind="AccountCheckOutline"></materialDesign:PackIcon>
+                            </materialDesign:Chip.Icon>
+                            <materialDesign:Chip.CommandParameter>
+                                <materialDesign:Card Width="245" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                                    <StackPanel Margin="16">
+                                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Margin="0 10">
+                                        <Separator/>
+                                        Credential</TextBlock>
+                                        <TextBox
+                                    x:Name="CredUserBox"  
+                                    materialDesign:HintAssist.Hint="Username"
+                                    FontSize="14"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    VerticalAlignment="Center"  Width="200"/>
+                                        <PasswordBox
+                                        Margin="0 15 0 0"
+                                      x:Name="CredPasswordBox"
+                                      materialDesign:HintAssist.Hint="Password"
+                                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                                      FontSize="14"
+                                      VerticalAlignment="Center"  Width="200"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button
+                                          Style="{StaticResource MaterialDesignOutlinedButton}"
+                                          IsCancel="False"
+                                          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                          x:Name="OKCredential"
+                                          Margin="5 10"
+                                          Height="35"
+                                          HorizontalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal"  Margin="5 5">
+                                                    <materialDesign:PackIcon Kind="CheckboxMarkedCircle" Foreground="Green"/>
+                                                    <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                                                    Text="OK" Margin="2 0"></TextBlock>
+                                                </StackPanel>
+
+                                            </Button>
+                                            <Button
+                                          Style="{StaticResource MaterialDesignOutlinedButton}"
+                                          IsCancel="True"
+                                          Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                          Height="35"
+                                          CommandParameter="Sample2Cancel"
+                                          Margin="10 10 0 10"
+                                          HorizontalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5">
+                                                    <materialDesign:PackIcon Kind="AlphaXCircle" Foreground="Crimson" />
+                                                    <TextBlock Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                                                    Text="Cancel" Margin="2 0"></TextBlock>
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </materialDesign:Card>
+
+                            </materialDesign:Chip.CommandParameter>
+                        </materialDesign:Chip>
+                        
+                    </DockPanel>
+
+                </materialDesign:ColorZone>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" 
+                      VerticalScrollBarVisibility="Auto" 
+                      DockPanel.Dock="Left" MinWidth="250" MaxWidth="350"
+                      HorizontalAlignment="Left">
+                    <StackPanel MinWidth="240" MaxWidth="325" HorizontalAlignment="Left" x:Name="CmdPanel">
+                        <Expander>
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Twitter" HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"></materialDesign:PackIcon>
+                                    <TextBlock HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"
+                                       Margin="10 0"
+                                       Style="{StaticResource MaterialDesignSubtitle2TextBlock}">  
+                                        General
+                                    </TextBlock>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Margin="20 0 10 0">
+                                <RadioButton
+                              Style="{StaticResource MaterialDesignChoiceChipRadioButton}"
+                              
+                              Content="Test Connection" 
+                              GroupName="Commands"/>
+
+                                <RadioButton
+                              Style="{StaticResource MaterialDesignChoiceChipRadioButton}"
+                              
+                            GroupName="Commands"  
+                            Content="Get Uptime" />
+                                <RadioButton
+                              Style="{StaticResource MaterialDesignChoiceChipRadioButton}"
+                              
+                            GroupName="Commands"
+                              Content="Get DarkLive" />
+                            </StackPanel>
+                        </Expander>
+                        <Expander Header="Service">
+                            <StackPanel Margin="20 0 10 0">
+                                <RadioButton
+                              Style="{StaticResource MaterialDesignTabRadioButton}"
+                              HorizontalAlignment="Left"
+                              Content="Test Connection" 
+                                     HorizontalContentAlignment="Left"
+                              GroupName="Commands"/>
+                                <RadioButton
+                              Style="{StaticResource MaterialDesignTabRadioButton}"
+                              HorizontalAlignment="Left"
+                              GroupName="Commands"  
+                              HorizontalContentAlignment="Left" Content="Get Uptime"
+                              >
+
+                                </RadioButton>
+                                <RadioButton Width="170"
+                              Style="{StaticResource MaterialDesignTabRadioButton}"
+                              HorizontalAlignment="Left"
+                              GroupName="Commands"
+                              HorizontalContentAlignment="Left"
+                                     Content="Get DarkLive" />
+                            </StackPanel>
+                        </Expander>
+                        <Expander Header="Cluster">
+                            <StackPanel Margin="20 0 10 0">
+                                <RadioButton
+                             
+                              Foreground="Crimson"
+                              FontWeight="DemiBold"
+                              Content="Test Connection" 
+                              GroupName="Commands"/>
+                                <RadioButton
+                              Style="{StaticResource MaterialDesignToolRadioButton}"
+                              FontWeight="DemiBold"
+                            GroupName="Commands"  
+                            Content="Get Uptime" />
+                                <RadioButton
+                              Style="{StaticResource MaterialDesignToolRadioButton}"
+                              FontWeight="DemiBold"
+                              Foreground="Yellow"
+                            GroupName="Commands"
+                              Content="Get DarkLive" />
+                            </StackPanel>
+                        </Expander>
+                        <!-- <mde:SideNavigation Name="SideNav"/> -->
+                         
+                    </StackPanel>
+                </ScrollViewer>
+                <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Height="40">
+                </StackPanel>
+                <wv2:WebView2 x:Name="CtrlOutput" Source="https://www.google.com"></wv2:WebView2>      
+                <!-- <RichTextBox></RichTextBox> -->
+            </DockPanel>    
+            
+        </materialDesign:DialogHost>
+        
+    </DockPanel>
+
+</Window>
